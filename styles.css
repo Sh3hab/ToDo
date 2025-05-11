@@ -1,0 +1,373 @@
+body {
+  font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #121212;
+    font-family: 'Cairo', sans-serif;
+    padding: 0;
+    margin: 0;
+    color: #E0E0E0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto 100px;
+    padding: 30px;
+    background-color: #1E1E1E;
+    border-radius: 31px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease;
+    flex: 1;
+}
+
+h1 {
+    text-align: center;
+    color: #D2B48C;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.todo-item {
+    padding: 15px;
+    border-radius: 16px;
+    background-color: #2A2A2A;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s;
+    position: relative;
+    overflow: hidden;
+}
+
+.todo-item:hover {
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-right: 35px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    user-select: none;
+    gap: 15px;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    right: 0;
+    height: 25px;
+    width: 25px;
+    background-color: transparent;
+    border: 1px solid #D2B48C;
+    border-radius: 20%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-checkbox:hover input ~ .checkmark {
+    border-color: #D2B48C;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+    background-color: #D2B48C;
+    border-color: #D2B48C;
+    box-shadow: 0 0 0 2px rgba(210, 180, 140, 0.2);
+}
+
+.checkmark:after {
+    content: "";
+    display: none;
+    width: 12px;
+    height: 12px;
+    background: #12121266;
+    border-radius: 2px;
+    border: solid #121212;
+    border-width: 2px 2px 2px 2;
+    transform: rotate(90deg);
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.task-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.task-time {
+    color: #D2B48C;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.task-name {
+    color: #E0E0E0;
+    font-size: 1.1rem;
+}
+
+.custom-checkbox input:checked ~ .task-content .task-time,
+.custom-checkbox input:checked ~ .task-content .task-name {
+    color: #D2B48C;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+@keyframes taskShrink {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+@keyframes taskShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.task-complete {
+    animation: taskShrink 0.3s ease, taskShake 0.5s ease;
+}
+
+.progress-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #1e1e1e5e;
+    padding: 15px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    border-top: 1px solid #D2B48C;
+    backdrop-filter: blur(10px);
+}
+
+.progress-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #D2B48C;
+    border-radius: 8px;
+    width: 0%;
+    transition: width 0.5s ease, background-color 0.5s ease;
+    position: relative;
+}
+
+.progress-text {
+    text-align: center;
+    margin-top: 5px;
+    color: #E0E0E0;
+    font-weight: bold;
+}
+
+.task-counter {
+    text-align: center;
+    margin-top: 5px;
+    color: #C0A98F;
+    font-weight: bold;
+}
+
+.device-info {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 10px auto 0;
+    padding: 0 20px;
+    font-size: 0.9rem;
+    color: #B0B0B0;
+}
+
+.device-name {
+    font-weight: bold;
+}
+
+.last-update {
+    color: #A08060;
+}
+
+@keyframes progressRight {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes progressLeft {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+.progress-right {
+    animation: progressRight 0.5s ease;
+}
+
+.progress-left {
+    animation: progressLeft 0.5s ease;
+}
+
+@keyframes boom {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(210,180,140,0); }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(210,180,140,0.3); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(210,180,140,0); }
+}
+
+.completed-all {
+    animation: boom 2s ease;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin: 10px 10px 100px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .custom-checkbox {
+        font-size: 1rem;
+        padding-right: 30px;
+    }
+
+    .checkmark {
+        height: 20px;
+        width: 20px;
+    }
+
+    .progress-container {
+        padding: 0 15px;
+    }
+
+    .device-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .todo-item {
+        padding: 12px;
+    }
+
+    .task-name {
+        font-size: 1rem;
+    }
+
+    .task-time {
+        font-size: 0.8rem;
+    }
+
+    .progress-footer {
+        padding: 10px 0;
+    }
+
+    .device-info {
+        font-size: 0.8rem;
+    }
+}
+
+/* تحذير الجهاز */
+.device-warning {
+    font-size: 0.8rem;
+    color: #d32f2f;
+    background-color: #ffebee;
+    padding: 2px 8px;
+    border-radius: 50px;
+    margin-right: 5px;
+    display: inline-block;
+    font size:12px ;
+}
+
+/* مهمة البلندر المعطلة */
+.blender-task .custom-checkbox {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.blender-task .checkmark {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+}
+
+.blender-task .task-name {
+    color: #9e9e9e;
+}
+
+.blender-task .task-time {
+    color: #bdbdbd;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #d5bfa3;
+  color: #5c443a;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  margin-left: 8px;
+  border-radius: 12px;
+  font-family: "Cairo", sans-serif;
+}
+
+.tag {
+  position: absolute;
+  top: 50%;
+  left: 2px; /* المسافة من اليسار */
+  transform: translateY(-50%); /* توسيط رأسي */
+  background-color: #d5bfa3;
+  color: #5c443a;
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-family: "Cairo", sans-serif;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  pointer-events: none;
+}
+
+.typing-container {
+  text-align: center;
+  height: 30px;
+}
+
+.typing {
+  font-size: 18px;
+  color: #333;
+  border-right: 2px solid #333;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink 0.7s infinite;
+  min-width: 120px;
+  direction: rtl; /* للكتابة من اليمين */
+}
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: #333; }
+}
